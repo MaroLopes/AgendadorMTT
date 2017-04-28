@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>--- Login Agendador MTT ---</title>
+    </h:head>
+    <body>
+        <h:form>
+            <div>
+                <p:outputLabel value ="LOGIN"></p:outputLabel>
+            </div>
+            <br/>
+            <div>
+                <p:outputLabel value ="Usuário"></p:outputLabel>
+                <br/>
+                <p:inputText id ="USRNAME" placeholder="Digite seu Usuário!" required="true"></p:inputText>
+                <br/>
+                <br/>
+
+                <p:outputLabel value ="SENHA"></p:outputLabel>
+                <br/>
+                <p:password id="USRPASS" placeholder="Digite sua Senha!"/>
+                <br/>
+                <br/>
+                <p:commandButton value="Acessar" process="USRNAME USRPASS" validateClient="true" icon="ui-icon-check" style="margin-right:10px"/>
+                
+                
+            </div>
+        </h:form>
+        
+    </body>
+    
+</html>
