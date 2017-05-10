@@ -64,8 +64,8 @@ public class UsuariosBean {
             
             UsuariosDAO dao = new UsuariosDAO();
             dao.salvar(usuario);
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastro", "Usuário Cadastrado com sucesso!"));
+            RequestContext.getCurrentInstance().closeDialog(this);
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastro:", "Usuário Cadastrado com sucesso!"));
         } catch (Exception e) {
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", e.toString()));
         } 
@@ -76,14 +76,14 @@ public class UsuariosBean {
         
         try {
             if (selectedUsuarios.isEmpty()) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deleta", "Selecione Usuários para deleta-los"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deleta:", "Selecione Usuários para deleta-los"));
             }else{
                 for (Usuarios u : selectedUsuarios) {
 
                     UsuariosDAO dao = new UsuariosDAO();
                     dao.delete(u);
                 }
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletados", "Usuários deletados com sucesso!"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletados:", "Usuários deletados com sucesso!"));
             }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletados", e.getMessage()));
@@ -113,8 +113,8 @@ public class UsuariosBean {
 
     }
     
-    public void selectUsuarioFromDialog(Usuarios usuario) {
-        RequestContext.getCurrentInstance().closeDialog(usuario);
+    public void closeDialog() {
+        RequestContext.getCurrentInstance().closeDialog(this);
     }
     
 }

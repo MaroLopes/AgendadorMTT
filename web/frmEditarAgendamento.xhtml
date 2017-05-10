@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+        <title>Editar Agenda</title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+        <h:outputScript name="./js/locale_primefaces.js"></h:outputScript>
+    </h:head>
+     
+    <h:body>
+        <i id="customheader" class="fa fa-fw fa-car" style="display:none"></i>
+        <h:form>
+            
+            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel value="Chamado: " />
+                <p:outputLabel value="#{agendaBean.agenda.agendaId}" />
+                
+                <p:outputLabel value="Data Agendamento: " />
+                <p:calendar id="agendaData" value="#{agendaBean.agenda.agendaData}" pattern="dd/MM/yyyy" mask="true" locale="pt"/>
+
+                <p:outputLabel value="Hora Agendamento: " />
+                <p:calendar id="agendaHora" value="#{agendaBean.agenda.agendaHora}" pattern="HH:mm" timeOnly="true"  mask="true"/>
+
+                <p:outputLabel value="Projeto: " />
+                <p:inputText id ="agendaProjetoId" value="#{agendaBean.agenda.agendaProjetoId}"></p:inputText>
+
+                <p:outputLabel value="Cidade:  " />
+                <p:inputText id ="agendaCidade" value="#{agendaBean.agenda.agendaCidade}"></p:inputText>
+
+                <p:outputLabel value="UF: " />
+                <p:inputText id ="agendaUF" value="#{agendaBean.agenda.agendaUf}"></p:inputText>
+
+                <p:outputLabel value="Cliente Final: " />
+                <p:inputText id ="agendaCliente" value="#{agendaBean.agenda.agendaClienteFinal}"></p:inputText>
+
+                <p:outputLabel value="GP Solicitante: " />
+                <p:inputText id ="agendaSolicitante" value="#{agendaBean.agenda.agendaSolicitante}"></p:inputText>
+
+                <p:outputLabel value="Descrição: " />
+                <p:inputTextarea rows="6" cols="50" id ="agendaDesc" value="#{agendaBean.agenda.agendaDescricaoAtividade}"/>   
+
+            </p:panelGrid>
+            
+        <br/>
+        
+        <p:commandButton value="Salvar" actionListener="#{agendaBean.updateAgenda}" validateClient="true" icon="ui-icon-check" style="margin-right:10px"></p:commandButton>
+        <p:commandButton value="Fechar" actionListener="#{agendaBean.closeDialog}" icon="ui-icon-check" style="margin-right:10px"></p:commandButton>        
+            
+        </h:form>
+    </h:body>
+     
+</html>

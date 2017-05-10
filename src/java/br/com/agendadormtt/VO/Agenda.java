@@ -6,6 +6,7 @@
 package br.com.agendadormtt.VO;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;

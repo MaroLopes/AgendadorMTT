@@ -15,7 +15,7 @@
 
     <h:body>
 
-<!--        <div id="left"> teste maro lopes
+<!--        <div id="left">lll
             <ui:insert name="left">Left</ui:insert>
         </div>-->
         <div id="content" class="center_content">
@@ -23,61 +23,72 @@
                 <h:form>
                     <p:panel header="--- Cadastro de Usuários ---">
                         <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
-                        
-                        <p:panel id="gridlistausuarios">
                             
-                            <p:dataTable id="tblUsuarios" value="#{userBean.usuarios}" var="usuario"
-                                         rows="20" paginator="true"
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                         rowsPerPageTemplate="5,20,40"
-                                         emptyMessage="Usuário Não Encontrado!"
-                                         scrollable="true" scrollHeight="400"
-                                         selection="#{userBean.selectedUsuarios}" rowKey="#{usuario.usuariosId}" style="margin-bottom:0"
-                                         resizableColumns="true" resizeMode="expand">
-                                
-                                <f:facet name="header">
-                                    <p:commandButton value="Novo" actionListener="#{userBean.inserirUsuário()}" style="margin-right:10px"></p:commandButton>
-                                    <p:commandButton value="Deletar" update="tblUsuarios" process="tblUsuarios" actionListener="#{userBean.deleteUsuario()}" style="margin-right:10px"></p:commandButton>
-                                </f:facet>
-                                
-                                <f:facet name="{Exporters}">
-                                    <h:commandLink>
-                                        <p:graphicImage name="/images/excel1.png" width="24"/>
-                                        <p:dataExporter type="xls" target="tblUsuarios" fileName="usuarios" />
-                                    </h:commandLink>
+                        <p:dataTable id="tblUsuarios" value="#{userBean.usuarios}" var="usuario"
+                                     rows="20" paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     rowsPerPageTemplate="5,20,40"
+                                     emptyMessage="Usuário Não Encontrado!"
+                                     scrollable="true" scrollHeight="400"
+                                     selection="#{userBean.selectedUsuarios}" rowKey="#{usuario.usuariosId}" style="margin-bottom:0"
+                                     resizableColumns="true" resizeMode="expand">
 
-                                    <h:commandLink>
-                                        <p:graphicImage name="/images/pdf.png" width="24"/>
-                                        <p:dataExporter type="pdf" target="tblUsuarios" fileName="usuarios"/>
-                                    </h:commandLink>
+                            <f:facet name="header">
+                                <p:toolbar>
+                                    <f:facet name="left">
+                                        <p:commandButton value="Novo" actionListener="#{userBean.inserirUsuário()}" icon="ui-icon-document">
+                                            <p:ajax event="dialogReturn" update="tblUsuarios" />
+                                        </p:commandButton>
+                                        <p:commandButton value="Deletar" update="tblUsuarios" process="tblUsuarios" actionListener="#{userBean.deleteUsuario()}" icon="ui-icon-trash">
+                                            <p:confirm header="Deletando Usuários" message="Tem certeza que deseja deletar usuários selecionados?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                    </f:facet>
+                                </p:toolbar>
+                            </f:facet>
 
-                                    <h:commandLink>
-                                        <p:graphicImage name="/images/csv.png" width="24"/>
-                                        <p:dataExporter type="csv" target="tblUsuarios" fileName="usuarios" />
-                                    </h:commandLink>
-                                </f:facet>
-                                
-                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                                <p:column headerText="ID" filterBy="#{usuario.usuariosId}" sortBy="#{usuario.usuariosId}" filterMatchMode="exact">
-                                    <p:outputLabel value="#{usuario.usuariosId}" ></p:outputLabel>
-                                </p:column>
-                                
-                                <p:column headerText="Usuário" filterBy="#{usuario.usuariosNome}" sortBy="#{usuario.usuariosNome}" filterMatchMode="contains">
-                                    <p:outputLabel value="#{usuario.usuariosNome}" ></p:outputLabel>
-                                </p:column>
+                            <f:facet name="{Exporters}">
+                                <h:commandLink>
+                                    <p:graphicImage name="/images/excel1.png" width="24"/>
+                                    <p:dataExporter type="xls" target="tblUsuarios" fileName="usuarios" />
+                                </h:commandLink>
 
-                                <p:column headerText="E-mail" filterBy="#{usuario.usuariosMail}" sortBy="#{usuario.usuariosMail}" filterMatchMode="contains">
-                                    <p:outputLabel value="#{usuario.usuariosMail}"></p:outputLabel>
-                                </p:column>
+                                <h:commandLink>
+                                    <p:graphicImage name="/images/pdf.png" width="24"/>
+                                    <p:dataExporter type="pdf" target="tblUsuarios" fileName="usuarios"/>
+                                </h:commandLink>
 
-                                <p:column headerText="Password">
-                                    <p:outputLabel value="#{usuario.usuariosPassword}"></p:outputLabel>
-                                </p:column>
+                                <h:commandLink>
+                                    <p:graphicImage name="/images/csv.png" width="24"/>
+                                    <p:dataExporter type="csv" target="tblUsuarios" fileName="usuarios" />
+                                </h:commandLink>
+                            </f:facet>
 
-                            </p:dataTable>
-                        </p:panel>
+                            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                            <p:column headerText="ID" filterBy="#{usuario.usuariosId}" sortBy="#{usuario.usuariosId}" filterMatchMode="exact">
+                                <p:outputLabel value="#{usuario.usuariosId}" ></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="Usuário" filterBy="#{usuario.usuariosNome}" sortBy="#{usuario.usuariosNome}" filterMatchMode="contains">
+                                <p:outputLabel value="#{usuario.usuariosNome}" ></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="E-mail" filterBy="#{usuario.usuariosMail}" sortBy="#{usuario.usuariosMail}" filterMatchMode="contains">
+                                <p:outputLabel value="#{usuario.usuariosMail}"></p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="Password">
+                                <p:outputLabel value="#{usuario.usuariosPassword}"></p:outputLabel>
+                            </p:column>
+
+                        </p:dataTable>
                         
                     </p:panel>
+                    
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                    
                 </h:form>
             </ui:insert>
         </div>
