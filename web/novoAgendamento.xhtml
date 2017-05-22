@@ -15,33 +15,29 @@
     </h:head>
 
     <h:body>
-        <h:form>
-            <div id="top">
-                <h1>Gerador de Chamados MTT</h1>
+        <h:form id="form">
+            <div id="top" class="top">
+                <ui:insert name="top">
+                    <h1>Gerador de Chamados MTT</h1>
+                </ui:insert>
             </div>
-
-            <div id="left" class="center_content">
-                <ui:insert name="left">
-                    <p:panelGrid columns="1" >
-    <!--                    <p:selectOneButton value="#{selectOneView.option}">
-                            <f:selectItem itemLabel="Corporativo SPO" itemValue="Corporativo SPO" />
-                            <f:selectItem itemLabel="Corporativo RJO" itemValue="Corporativo RJO" />
-                        </p:selectOneButton>-->
+            
+            <div>
+                <div id="left">
+                    <ui:insert name="left">
                         <p:calendar id="inline" value="#{agendaBean.data1}" mode="inline" locale="pt">
                             <p:ajax event="dateSelect" listener="#{agendaBean.filtroDataTable}" update="form:tblAgenda"></p:ajax>
                         </p:calendar>
-                    </p:panelGrid>
-                </ui:insert>
-            </div>
-
-            <div id="content" class="left">
-                <ui:insert name="content">
-                    <h:form id="form">
+                    </ui:insert>
+                </div>
+                <div id="content" class="left_content">
+                    <ui:insert name="content">
 
                         <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
                         <p:dataTable id="tblAgenda" var="agenda" value="#{agendaBean.agendas}"
-                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                             paginator="true" rows="10" style="margin-bottom:0px"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                            rowsPerPageTemplate="5,20,40"
                             emptyMessage="Não há Agendamento!"
                             scrollable="true" scrollHeight="400"
                             selection="#{agendaBean.selectedAgendas}" rowKey="#{agenda.agendaId}"
@@ -67,7 +63,7 @@
                             <f:facet name="{Exporters}">
                                 <h:commandLink>
                                     <p:graphicImage name="/images/excel1.png" width="24"/>
-                                    <p:dataExporter type="xls" target="tblAgenda" fileName="Agenda" />
+                                    <p:dataExporter type="xls" target="tblAgenda" fileName="agenda" />
                                 </h:commandLink>
                             </f:facet>
 
@@ -146,10 +142,10 @@
                             <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
 
-                    </h:form>
-                </ui:insert>
+                    </ui:insert>
+                </div>
             </div>
         </h:form>
     </h:body>
-    
+
 </html>

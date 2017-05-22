@@ -32,7 +32,6 @@
                                      scrollable="true" scrollHeight="400"
                                      selection="#{userBean.selectedUsuarios}" rowKey="#{usuario.usuariosId}" style="margin-bottom:0"
                                      resizableColumns="true" resizeMode="expand">
-
                             <f:facet name="header">
                                 <p:toolbar>
                                     <f:facet name="left">
@@ -41,6 +40,9 @@
                                         </p:commandButton>
                                         <p:commandButton value="Deletar" update="tblUsuarios" process="tblUsuarios" actionListener="#{userBean.deleteUsuario()}" icon="ui-icon-trash">
                                             <p:confirm header="Deletando Usuários" message="Tem certeza que deseja deletar usuários selecionados?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                        <p:commandButton value="Teste Senha criptografada" actionListener="#{userBean.criptoSenha('ensel123')}" icon="ui-icon-document">
+                                            
                                         </p:commandButton>
                                     </f:facet>
                                 </p:toolbar>

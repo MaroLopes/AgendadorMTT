@@ -2,6 +2,9 @@ package br.com.agendadormtt.BEAN;
 
 import br.com.agendadormtt.DAO.UsuariosDAO;
 import br.com.agendadormtt.VO.Usuarios;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +26,16 @@ public class UsuariosBean {
     
     private List<Usuarios> usuarios;
     private List<Usuarios> selectedUsuarios;
+    private String senhaCripto;
 
+    public String getSenhaCripto() {
+        return senhaCripto;
+    }
+
+    public void setSenhaCripto(String senhaCripto) {
+        this.senhaCripto = senhaCripto;
+    }
+    
     public List<Usuarios> getSelectedUsuarios() {
         return selectedUsuarios;
     }
@@ -116,5 +128,21 @@ public class UsuariosBean {
     public void closeDialog() {
         RequestContext.getCurrentInstance().closeDialog(this);
     }
+    
+    public void criptoSenha(String data) throws NoSuchAlgorithmException, UnsupportedEncodingException
+        {
+            MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+            byte messageDigest[] = algorithm.digest(data.getBytes("UTF-8"));
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : messageDigest) {
+              hexString.append(String.format("%02X", 0xFF & b));
+            }
+            
+            String senha = hexString.toString();
+            setSenhaCripto(senha);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "senhaCripto:", getSenhaCripto()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "senha:", data));
+        }
     
 }
